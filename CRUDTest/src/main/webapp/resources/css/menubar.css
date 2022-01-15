@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+/* Global Setting */
+:root {
+	
+}
+
+/* Universal tags */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	cursor: default;
+}
+
+a {
+	text-decoration: none;
+	color: #333333
+}
+
+ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+li {
+	padding-left: 0;
+}
+
+#navbar {
+	position: fixed;
+	width: 100%;
+	background-color: #ffe5d9;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar__logo {
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.navbar__menu {
+	display: flex;
+}
+
+.navbar__menu__item {
+	padding: 0 12px;
+}
