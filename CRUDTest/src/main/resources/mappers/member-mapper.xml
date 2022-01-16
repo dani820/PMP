@@ -19,6 +19,6 @@
 	</resultMap>
 	
 	<select id="selectOneMember" parameterType="Member" resultMap="memberResultMap">
-		SELECT * FROM MEMBER WHERE USER_ID = #{userId} AND USER_PW = #{userPw}
+		SELECT USER_ID, USER_NAME FROM MEMBER WHERE USER_ID = #{userId} AND USER_PW = #{userPw}
 	</select>
 </mapper>

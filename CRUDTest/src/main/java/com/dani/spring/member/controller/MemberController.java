@@ -31,8 +31,8 @@ public class MemberController {
 		
 		if(loginUser != null) {
 			System.out.println(loginUser.toString());
-//			HttpSession session = request.getSession();
-//			session.setAttribute("loginUser", loginUser);
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
 			return "home";
 		}else {
 //			model.addAttribute("msg", "로그인 실패");

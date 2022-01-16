@@ -91,6 +91,10 @@
 					</tbody>
 				</table>
 			</c:if>
+			
+			<c:if test="${loginUser.userId == 'admin'}">
+				<button onclick="location.href='noticeWrite.di'">공지쓰기</button>
+			</c:if>
 		</div>
 	</main>
 </body>
