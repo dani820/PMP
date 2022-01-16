@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<!-- null 체크 : 전달된 데이터가 null 일 때 빈 칸으로 표시될 수 있음. 이를 null 로 표시하도록 설정 변경 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<!-- 사용할 클래스 별칭 붙이기 -->
+	<typeAliases>
+		<typeAlias type="com.dani.spring.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.dani.spring.notice.domain.Notice" alias="Notice"/>
+	</typeAliases>
+	
+	<!-- DB 사용 위한 쿼리문들을 모아놓은 mapper.xml 파일 등록 -->
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml"/>
+	</mappers>
+</configuration>
