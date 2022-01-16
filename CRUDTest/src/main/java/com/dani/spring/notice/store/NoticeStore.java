@@ -8,5 +8,6 @@ import com.dani.spring.notice.domain.PageInfo;
 public interface NoticeStore {
 
 	ArrayList<Notice> selectNList(PageInfo pi);
+	int selectListCount();
 
 }

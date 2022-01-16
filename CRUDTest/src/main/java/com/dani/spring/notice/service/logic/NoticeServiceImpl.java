@@ -18,7 +18,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public int getListCount() {
-		return 0;
+		return nStore.selectListCount();
 	}
 
 	@Override

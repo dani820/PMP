@@ -23,25 +23,25 @@ public class NoticeController {
 	private NoticeService nService;
 
 	@RequestMapping (value="noticeList.di", method=RequestMethod.GET)
-	public String noticeListView(HttpServletRequest request) {
-//	public ModelAndView noticeListView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
-//		
-//		int currentPage = (page != null) ? page : 1;
-//		int listCount = nService.getListCount();
-//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-//		
-//		ArrayList<Notice> nList = nService.printAll(pi);
-//		
-//		if(nList != null) {
-//			mv.addObject("nList", nList);
-//			mv.addObject("pi", pi);
-//			mv.setViewName("notice/noticeList.jsp");
-//		}else {
-//			mv.addObject("msg", "공지사항 조회 실패");
-//			mv.setViewName("errorPage");
-//		}
-//		
-//		return mv;
-		return "notice/noticeList";
+//	public String noticeListView(HttpServletRequest request) {
+	public ModelAndView noticeListView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
+		
+		int currentPage = (page != null) ? page : 1;
+		int listCount = nService.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Notice> nList = nService.printAll(pi);
+		
+		if(nList != null) {
+			mv.addObject("nList", nList);
+			mv.addObject("pi", pi);
+			mv.setViewName("notice/noticeList");
+		}else {
+			mv.addObject("msg", "공지사항 조회 실패");
+			mv.setViewName("errorPage");
+		}
+		
+		return mv;
+//		return "notice/noticeList";
 	}
 }

@@ -18,12 +18,18 @@ public class NoticeStoreLogic implements NoticeStore {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Notice> selectNList(PageInfo pi) {
-//		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-//		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-//		return (ArrayList)sqlSession.selectList("boardMapper.selectAllList", null, rowBounds);
-		return null;
+	public int selectListCount() {
+		int listCount = sqlSession.selectOne("noticeMapper.selectListCount");
+		return listCount;
 	}
+	
+	@Override
+	public ArrayList<Notice> selectNList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectAllList", null, rowBounds);
+	}
+
 
 }
