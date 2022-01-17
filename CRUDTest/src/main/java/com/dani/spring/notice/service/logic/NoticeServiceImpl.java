@@ -27,4 +27,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return nList;
 	}
 
+	@Override
+	public int registerNotice(Notice notice) {
+		return nStore.insertNotice(notice);
+	}
+
 }

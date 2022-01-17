@@ -1,14 +1,19 @@
 package com.dani.spring.notice.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dani.spring.common.Pagination;
@@ -43,5 +48,57 @@ public class NoticeController {
 		
 		return mv;
 //		return "notice/noticeList";
+	}
+	
+	@RequestMapping(value="noticeWriteView.di", method=RequestMethod.GET)
+	public String noticeWriteView() {
+		return "notice/noticeWriteForm";
+	}
+	
+	@RequestMapping (value="noticeWrite.di", method=RequestMethod.POST)
+	public String registerNotice(@ModelAttribute Notice notice, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request, Model model) {
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String filePath = saveFile(uploadFile, request);
+			if(filePath != null) {
+				notice.setNoticeFilePath(uploadFile.getOriginalFilename());
+			}
+		}
+		
+		int result = 0;
+		result = nService.registerNotice(notice);
+		if(result > 0) {
+			return "redirect:noticeList.di";
+		}else {
+			model.addAttribute("msg", "공지사항 등록 실패");
+			return "errorPage";
+		}
+	}
+
+	public String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
+//		depreacated > 더 이상 사용되지 않음
+//		request.getRealPath("resources");
+//		ServletContext().getRealPath("resources") 로 대체
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/noticeUpload";
+		
+		File folder = new File(savePath);
+		
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		
+		String filePath = folder + "/" + uploadFile.getOriginalFilename();
+		
+		try {
+			uploadFile.transferTo(new File(filePath));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return filePath;
 	}
 }

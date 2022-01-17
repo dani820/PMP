@@ -18,4 +18,8 @@
 	<select id="selectAllList" resultMap="noticeResultMap">
 		SELECT * FROM NOTICE ORDER BY N_UPDATE_DATE DESC
 	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE VALUES (#{noticeNo}, #{noticeTitle}, #{noticeContents}, #{noticeWriter}, SYSDATE, SYSDATE, #{noticeFilePath})
+	</insert>
 </mapper>

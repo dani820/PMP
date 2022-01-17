@@ -31,5 +31,11 @@ public class NoticeStoreLogic implements NoticeStore {
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectAllList", null, rowBounds);
 	}
 
+	@Override
+	public int insertNotice(Notice notice) {
+		int result = sqlSession.insert("noticeMapper.insertNotice", notice);
+		return result;
+	}
+
 
 }
