@@ -22,4 +22,8 @@
 	<insert id="insertNotice" parameterType="Notice">
 		INSERT INTO NOTICE VALUES (#{noticeNo}, #{noticeTitle}, #{noticeContents}, #{noticeWriter}, SYSDATE, SYSDATE, #{noticeFilePath})
 	</insert>
+	
+	<select id="selectOne" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE WHERE NOTICE_NO = #{noticeNo}
+	</select>
 </mapper>

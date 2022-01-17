@@ -101,4 +101,17 @@ public class NoticeController {
 		
 		return filePath;
 	}
+	
+	@RequestMapping(value="noticeDetailView.di", method=RequestMethod.GET)
+	public String noticeDetailView(@RequestParam("noticeNo") int noticeNo, Model model) {
+		Notice notice = nService.printOne(noticeNo);
+		
+		if(notice != null) {
+			model.addAttribute("notice", notice);
+			return "notice/noticeDetailView";
+		}else {
+			model.addAttribute("msg", "공지사항 상세조회 실패");
+			return "errorPage";
+		}
+	}
 }

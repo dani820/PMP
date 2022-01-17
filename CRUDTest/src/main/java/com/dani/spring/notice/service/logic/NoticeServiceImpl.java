@@ -32,4 +32,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return nStore.insertNotice(notice);
 	}
 
+	@Override
+	public Notice printOne(int noticeNo) {
+		return nStore.selectOne(noticeNo);
+	}
+
 }

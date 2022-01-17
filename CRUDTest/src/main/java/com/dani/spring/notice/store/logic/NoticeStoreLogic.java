@@ -37,5 +37,11 @@ public class NoticeStoreLogic implements NoticeStore {
 		return result;
 	}
 
+	@Override
+	public Notice selectOne(int noticeNo) {
+		Notice notice = sqlSession.selectOne("noticeMapper.selectOne", noticeNo);
+		return notice;
+	}
+
 
 }

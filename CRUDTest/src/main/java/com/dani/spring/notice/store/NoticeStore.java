@@ -10,5 +10,6 @@ public interface NoticeStore {
 	ArrayList<Notice> selectNList(PageInfo pi);
 	int selectListCount();
 	int insertNotice(Notice notice);
+	Notice selectOne(int noticeNo);
 
 }

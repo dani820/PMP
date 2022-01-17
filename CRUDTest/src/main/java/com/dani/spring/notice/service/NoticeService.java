@@ -10,5 +10,6 @@ public interface NoticeService {
 	int getListCount();
 	ArrayList<Notice> printAll(PageInfo pi);
 	int registerNotice(Notice notice);
+	Notice printOne(int noticeNo);
 
 }

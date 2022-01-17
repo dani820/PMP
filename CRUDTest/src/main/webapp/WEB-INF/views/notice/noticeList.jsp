@@ -29,7 +29,10 @@
 						<c:set var="num" value="${pi.listCount - ((pi.currentPage-1) * 5) - status.index }"/>
 						<tr>
 							<td>${num}</td>
-							<td>${notice.noticeTitle}</td>
+							<c:url var="nDetail" value="noticeDetailView.di">
+								<c:param name="noticeNo" value="${notice.noticeNo}"></c:param>
+							</c:url>
+							<td><a href="${nDetail}">${notice.noticeTitle}</a></td>
 							<td>${notice.noticeWriter}</td>
 							<td>${notice.nUpdateDate}</td>
 						</tr>
