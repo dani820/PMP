@@ -27,7 +27,7 @@
 				<tbody>
 					<tr>
 						<td>내용</td>
-						<td><textarea rows="7" cols="50" name="noticeContent"></textarea></td>
+						<td><textarea rows="7" cols="50" name="noticeContents"></textarea></td>
 					</tr>
 					<tr>
 						<td>첨부파일</td>

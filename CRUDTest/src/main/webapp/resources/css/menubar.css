@@ -42,6 +42,7 @@ li {
 .navbar__logo {
 	font-size: 28px;
 	font-weight: 600;
+	padding-left: 10px;
 }
 
 .navbar__menu {

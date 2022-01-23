@@ -10,8 +10,8 @@
 <body>
 	<jsp:include page="menubar.jsp"></jsp:include> 
 	
-	<section id="Home">
+<!-- 	<section id="Home">
 		<h1 class="home__title">게시판 만들기</h1>
-	</section>
+	</section> -->
 </body>
 </html>

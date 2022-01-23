@@ -20,7 +20,13 @@
 	</select>
 	
 	<insert id="insertNotice" parameterType="Notice">
-		INSERT INTO NOTICE VALUES (#{noticeNo}, #{noticeTitle}, #{noticeContents}, #{noticeWriter}, SYSDATE, SYSDATE, #{noticeFilePath})
+		INSERT INTO NOTICE VALUES (SEQ_NOTICEID.NEXTVAL, 
+								   #{noticeTitle}, 
+								   #{noticeContents}, 
+								   #{noticeWriter}, 
+								   SYSDATE, 
+								   SYSDATE, 
+								   #{noticeFilePath})
 	</insert>
 	
 	<select id="selectOne" resultMap="noticeResultMap">

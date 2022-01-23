@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias type="com.dani.spring.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.dani.spring.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.dani.psring.qna.domain.Qna" alias="Qna"/>
 	</typeAliases>
 	
 	<!-- DB 사용 위한 쿼리문들을 모아놓은 mapper.xml 파일 등록 -->

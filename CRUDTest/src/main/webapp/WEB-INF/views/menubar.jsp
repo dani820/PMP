@@ -13,7 +13,7 @@
 	<nav id="navbar">
 		<div class="navbar__logo">
 			<img class="navbar__logo__img" src="/resources/imgs/planet.png" alt="logo image" width= 20px height=20px>
-			<a href="#">DaIn</a>
+			<a href="/">Board</a>
 		</div>
 		<ul class="navbar__menu">
 			<li class="navbar__menu__item"><a href="/noticeList.di">공지사항</a></li>
