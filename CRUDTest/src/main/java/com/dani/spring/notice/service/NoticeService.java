@@ -11,5 +11,7 @@ public interface NoticeService {
 	ArrayList<Notice> printAll(PageInfo pi);
 	int registerNotice(Notice notice);
 	Notice printOne(int noticeNo);
+	int modifyNotice(Notice notice);
+	int deleteOne(int noticeNo);
 
 }

@@ -11,5 +11,7 @@ public interface NoticeStore {
 	int selectListCount();
 	int insertNotice(Notice notice);
 	Notice selectOne(int noticeNo);
+	int updateNotice(Notice notice);
+	int deleteOne(int noticeNo);
 
 }

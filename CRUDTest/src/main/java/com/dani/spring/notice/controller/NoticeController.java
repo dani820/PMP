@@ -114,4 +114,64 @@ public class NoticeController {
 			return "errorPage";
 		}
 	}
+	
+	@RequestMapping(value="modifyNoticeView.di", method=RequestMethod.GET)
+	public String modifyNoticeView(@RequestParam("noticeNo") int noticeNo, Model model) {
+		System.out.println("modify view noticeNo : " + noticeNo);
+		Notice noticeOne = nService.printOne(noticeNo);
+		model.addAttribute("notice", noticeOne);
+		
+		return "notice/noticeModifyForm";
+	}
+	
+	@RequestMapping(value="modifyNotice.di", method=RequestMethod.POST)
+	public String modifyNotice(@ModelAttribute Notice notice, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile, HttpServletRequest request, Model model) {
+		if(reloadFile != null && !reloadFile.isEmpty()) {
+			if(notice.getNoticeFilePath() != null) {
+				deleteFile(notice.getNoticeFilePath(), request);
+			}
+			
+			String savePath = saveFile(reloadFile, request);
+			
+			if(savePath != null) {
+				notice.setNoticeFilePath(reloadFile.getOriginalFilename());
+			}
+		}else {
+			
+		}
+		
+		int result = nService.modifyNotice(notice);
+		
+		if(result > 0) {
+			return "redirect:noticeDetailView.di?noticeNo=" + notice.getNoticeNo();
+		}else {
+			return "errorPage";
+		}
+	}
+
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String deletePath = root + "/noticeUpload";
+		
+		File deleteFile = new File(deletePath + "/" + fileName);
+		
+		if(deleteFile.exists()) {
+			deleteFile.delete();
+		}
+	}
+	
+	@RequestMapping(value="deleteNotice.di", method=RequestMethod.GET)
+	public String deleteNotice(@RequestParam("noticeNo") int noticeNo, HttpServletRequest request) {
+		Notice notice = nService.printOne(noticeNo);
+		int result = nService.deleteOne(noticeNo);
+		
+		if(result > 0) {
+			if(notice.getNoticeFilePath() != null) {
+				deleteFile(notice.getNoticeFilePath(), request);
+			}
+			return "redirect:noticeList.di";
+		}else {
+			return "errorPage";
+		}
+	}
 }

@@ -26,7 +26,12 @@
 					</tr>
 					<tr>
 						<td>작성날짜</td>
-						<td>${notice.nCreateDate }</td>
+						<c:if test="${!empty notice.nUpdateDate}">
+							<td>${notice.nUpdateDate }</td>
+						</c:if>
+						<c:if test="${empty notice.nUpdateDate}">
+							<td>${notice.nCreateDate }</td>
+						</c:if>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,8 +45,14 @@
 					<tr>
 					<tr>
 						<td>
-							<button onclick="location.href='modifyNoticeView.di?noticeNo=${notice.noticeNo}'">수정하기</button>
-							<button onclick="location.href='noticeDelete.di?noticeNo=${notice.noticeNo}'">삭제하기</button>
+							<c:url var="nModify" value="modifyNoticeView.di">
+								<c:param name="noticeNo" value="${notice.noticeNo}"></c:param>
+							</c:url>
+							<c:url var="nDelete" value="deleteNotice.di">
+								<c:param name="noticeNo" value="${notice.noticeNo}"></c:param>
+							</c:url>
+							<a href="${nModify}">수정하기</a>
+							<a href="${nDelete}">삭제하기</a>
 						</td>	
 					</tr>
 				</tbody>

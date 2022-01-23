@@ -11,7 +11,7 @@
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="SPRING"></property>
-		<property name="password" value="SPRING"></property>
+		<property name="password" value="spring3"></property>
 	</bean>	
 	
 	<!-- MyBatis 에서 사용할 수 있도록 하기 위해 sqlSession 을 넘겨주어야 한다. -->

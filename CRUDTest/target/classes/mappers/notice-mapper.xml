@@ -26,4 +26,16 @@
 	<select id="selectOne" resultMap="noticeResultMap">
 		SELECT * FROM NOTICE WHERE NOTICE_NO = #{noticeNo}
 	</select>
+	
+	<update id="updateOne">
+		UPDATE NOTICE SET NOTICE_TITLE = #{noticeTitle}, 
+						  NOTICE_CONTENTS = #{noticeContents},
+						  N_UPDATE_DATE = SYSDATE,
+						  NOTICE_FILEPATH = #{noticeFilePath}
+						  WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	
+	<delete id="deleteOne">
+		DELETE FROM NOTICE WHERE NOTICE_NO = #{noticeNo}
+	</delete>
 </mapper>

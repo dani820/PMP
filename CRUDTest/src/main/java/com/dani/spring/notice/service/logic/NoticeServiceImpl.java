@@ -37,4 +37,14 @@ public class NoticeServiceImpl implements NoticeService {
 		return nStore.selectOne(noticeNo);
 	}
 
+	@Override
+	public int modifyNotice(Notice notice) {
+		return nStore.updateNotice(notice);
+	}
+
+	@Override
+	public int deleteOne(int noticeNo) {
+		return nStore.deleteOne(noticeNo);
+	}
+
 }
