@@ -12,4 +12,20 @@
 		<result property="qnaCount" column="QNA_COUNT"/>
 		<result property="qnaPublicYn" column="QNA_PUBLIC_YN"/>
 	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT (*) FROM QNA WHERE QNA_PUBLIC_YN = 'Y'
+	</select>
+	
+	<select id="selectAllList" resultMap="qnaMapper">
+		SELECT QNA_TITLE,
+			   QNA_CONTENT,
+			   QNA_WRITER,
+			   Q_CREATE_DATE,
+			   Q_UPDATE_DATE,
+			   QNA_FILEPATH,
+			   QNA_COUNT,
+	    FROM QNA
+	    WHERE QNA_PUBLIC_YN = 'Y'
+	</select>
 </mapper>
