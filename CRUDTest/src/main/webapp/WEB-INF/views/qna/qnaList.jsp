@@ -77,7 +77,7 @@
 				</c:if>
 			</div>
 			<div class="btn-area">
-				<a class="btn btn-primary writeBtn" href="#" role="button">글쓰기</a>
+				<a class="btn btn-primary writeBtn" href="qnaWriteView.di" role="button">글쓰기</a>
 			</div>
 	</main>
 </body>

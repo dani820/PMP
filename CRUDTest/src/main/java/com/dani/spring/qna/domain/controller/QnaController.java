@@ -2,6 +2,9 @@ package com.dani.spring.qna.domain.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dani.spring.common.Pagination;
+import com.dani.spring.member.domain.Member;
 import com.dani.spring.notice.domain.PageInfo;
 import com.dani.spring.qna.domain.Qna;
 import com.dani.spring.qna.domain.service.QnaService;
@@ -26,15 +30,20 @@ public class QnaController {
 		int listCount = qService.getListCount();
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		ArrayList<Qna> qnaList = qService.printAll(pi);
-		
-		if(qnaList.size() > 0) {
-			model.addAttribute("pi", pi);
-			model.addAttribute("qnaList", qnaList);
+//		ArrayList<Qna> qnaList = qService.printAll(pi);
+//		
+//		if(qnaList.size() > 0) {
+//			model.addAttribute("pi", pi);
+//			model.addAttribute("qnaList", qnaList);
 			
 			return "qna/qnaList";
-		}else {
-			return "errorPage";
-		}
+//		}else {
+//			return "errorPage";
+//		}
+	}
+	
+	@RequestMapping(value="qnaWriteView.di", method=RequestMethod.GET)
+	public String qnaWriteView() {
+		return "qna/qnaWriteView";
 	}
 }

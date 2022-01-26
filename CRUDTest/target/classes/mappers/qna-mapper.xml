@@ -17,14 +17,14 @@
 		SELECT COUNT (*) FROM QNA WHERE QNA_PUBLIC_YN = 'Y'
 	</select>
 	
-	<select id="selectAllList" resultMap="qnaMapper">
+	<select id="selectAllList" resultMap="qnaResultMap">
 		SELECT QNA_TITLE,
 			   QNA_CONTENT,
 			   QNA_WRITER,
 			   Q_CREATE_DATE,
 			   Q_UPDATE_DATE,
 			   QNA_FILEPATH,
-			   QNA_COUNT,
+			   QNA_COUNT
 	    FROM QNA
 	    WHERE QNA_PUBLIC_YN = 'Y'
 	</select>
