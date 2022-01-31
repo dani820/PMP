@@ -35,9 +35,28 @@ main {
 
 h1 {
 	text-align: center;	
-	padding-bottom: 50px;
+	padding: 50px;
+	margin: 0;
+}
+
+input[type=text] {
+	width: 80%;
+}
+
+textarea {
+	width: 80%;
+	height: 300px;
 }
 
 .btn-area {
 	text-align: right;
+}
+
+.btn-file {
+	background-color: slategrey;
+    padding: 8px;
+    color: #ffffff;
+    border: 1px solid #616161;
+    border-radius: 4px;
+    cursor: pointer;
 }

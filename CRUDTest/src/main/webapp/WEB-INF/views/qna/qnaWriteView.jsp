@@ -5,13 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/qna/qnaWriteView.css">
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- summernote -->
-<script src="resources/js/summernote/summernote-lite.js"></script>
-<script src="resources/js/summernote/lang/summernote-ko-KR.js"></script>
-<link rel="stylesheet" href="resources/css/summernote/summernote-lite.css">
 <title>문의글 작성</title>
+<!-- 부트스트랩 -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- summernote -->
+<!-- <script src="resources/js/summernote/summernote-lite.js"></script>
+<script src="resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="resources/css/summernote/summernote-lite.css"> -->
 </head>
 <body>
 	<jsp:include page="../menubar.jsp"/>
@@ -19,25 +20,42 @@
 	<main>
 		<h1>문의글 작성</h1>
 		<div class="form-area">
-			<div class="title-area">
-				<input type="text" name="qnaTitle" placeholder="제목">
-			</div>
-			<div class="writer-area">
-				<input type="text" name="qnaWriter" value="${loginUser.userId}" readonly>
-			</div>
-			<div class="text-area">
-				<textarea class="summernote" name="qnaContent"></textarea>
-			</div>
-		</div>		
+			<form class="form-horizontal" method="POST" encType="multipart/form-data">
+				<div class="form-group">
+					<label for="qnaTitle" class="col-sm-2 control-label">제목</label>
+					<div class="col-sm-10">
+						<input type="text" id="qnaTitle" name="qnaTitle">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="qnaWriter" class="col-sm-2 control-label">작성자</label>
+					<div class="col-sm-10">
+						<input type="text" id="qnaWriter" name="qnaWriter" value="${loginUser.userId}" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<textarea id="summernote" name="qnaContent"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<div class="col-sm-10">
+						<input id="fileName" value="파일선택" disabled="disabled" style="width: 70%; display: inline;">
+						<div class="btn-file" style="display: inline-block;">
+							<label for="uploadFile">파일등록</label>
+							<input type="file" size="50" id="uploadFile" name="uploadFile" value="파일선택" disabled="disabled">
+						</div>
+					</div>
+				</div>
+				<div class="form-group btn-area">
+					<div class="col-sm-offset-2 col-sm-5">
+						<button type="submit" class="btn btn-primary">등록</button>
+						<button type="reset" class="btn btn-danger">취소</button>
+					</div>
+				</div>
+			</form>		
+		</div>
 	</main>
-	<script>
-		$('.summernote').summernote({
-			placeholder: '문의글 작성',
-			minHeight: 370,
-			maxHeight: null,
-			focus: true,
-			lang: 'ko-KR'
-		});
-</script>
 </body>
 </html>
