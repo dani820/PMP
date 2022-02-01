@@ -9,8 +9,8 @@
 		<result property="qCreateDate" column="Q_CREATE_DATE"/>
 		<result property="qUpdateDate" column="Q_UPDATE_DATE"/>
 		<result property="qnaFilePath" column="QNA_FILEPATH"/>
-		<result property="qnaCount" column="QNA_COUNT"/>
 		<result property="qnaPublicYn" column="QNA_PUBLIC_YN"/>
+		<!-- <result property="qnaCount" column="QNA_COUNT"/> -->
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -22,10 +22,21 @@
 			   QNA_CONTENT,
 			   QNA_WRITER,
 			   Q_CREATE_DATE,
-			   Q_UPDATE_DATE,
-			   QNA_FILEPATH,
-			   QNA_COUNT
+			   Q_UPDATE_DATE
 	    FROM QNA
 	    WHERE QNA_PUBLIC_YN = 'Y'
 	</select>
+	
+	<insert id="insertQuestion">
+		INSERT INTO QNA VALUES (
+			SEQ_QNA.NEXTVAL,
+			#{qnaTitle},
+			#{qnaWriter},
+			#{qnaContent},
+			SYSDATE,
+			SYSDATE,
+			#{qnaFilePath},
+			#{qnaPublicYn}
+		)
+	</insert>
 </mapper>

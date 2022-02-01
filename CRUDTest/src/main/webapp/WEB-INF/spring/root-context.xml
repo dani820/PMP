@@ -28,4 +28,17 @@
 		<constructor-arg ref="sqlSession"></constructor-arg>
 	</bean>	
 	
+	<!-- 파일 업로드 관련 bean 등록, multipartResolver
+		1. maxUploadSize : 한 요청당 업로드가 허용되는 최대용량을 바이트 단위로 설정
+		, -1은 제한이 없다는 뜻이고 프로퍼티를 지정하지 않을 때 기본값
+		2. maxInMemorySize : 디스크에 저장하지 않고 메모리에 유지하도록 허용하는
+		바이트 단위 최대용량
+		기본값은 10240 바이트
+		1MB => 1000000 Byte, (KB, MB, GB, TB)
+	 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000"></property>
+		<property name="maxInMemorySize" value="100000000"></property>
+	</bean>
+	
 </beans>

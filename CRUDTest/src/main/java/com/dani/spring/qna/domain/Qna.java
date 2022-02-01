@@ -9,6 +9,8 @@ public class Qna {
 	private String qnaWriter;
 	private Date qCreateDate;
 	private Date qUpdateDate;
+	private String qnaOriginalFileName;
+	private String qnaRenameFileName;
 	private String qnaFilePath;
 	private String qnaPublicYn;
 	private int qnaCount;
@@ -49,6 +51,18 @@ public class Qna {
 	public void setqUpdateDate(Date qUpdateDate) {
 		this.qUpdateDate = qUpdateDate;
 	}
+	public String getQnaOriginalFileName() {
+		return qnaOriginalFileName;
+	}
+	public void setQnaOriginalFileName(String qnaOriginalFileName) {
+		this.qnaOriginalFileName = qnaOriginalFileName;
+	}
+	public String getQnaRenameFileName() {
+		return qnaRenameFileName;
+	}
+	public void setQnaRenameFileName(String qnaRenameFileName) {
+		this.qnaRenameFileName = qnaRenameFileName;
+	}
 	public String getQnaFilePath() {
 		return qnaFilePath;
 	}
@@ -71,8 +85,9 @@ public class Qna {
 	@Override
 	public String toString() {
 		return "Qna [qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", qnaWriter="
-				+ qnaWriter + ", qCreateDate=" + qCreateDate + ", qUpdateDate=" + qUpdateDate + ", qnaFilePath="
-				+ qnaFilePath + ", qnaPublicYn=" + qnaPublicYn + ", qnaCount=" + qnaCount + "]";
+				+ qnaWriter + ", qCreateDate=" + qCreateDate + ", qUpdateDate=" + qUpdateDate + ", qnaOriginalFileName="
+				+ qnaOriginalFileName + ", qnaRenameFileName=" + qnaRenameFileName + ", qnaFilePath=" + qnaFilePath
+				+ ", qnaPublicYn=" + qnaPublicYn + ", qnaCount=" + qnaCount + "]";
 	}
 	
 	

@@ -28,4 +28,10 @@ public class QnaServiceImpl implements QnaService {
 		return null;
 	}
 
+	@Override
+	public int registerQuestion(Qna qna) {
+		int result = qStore.insertQuestion(qna);
+		return result;
+	}
+
 }

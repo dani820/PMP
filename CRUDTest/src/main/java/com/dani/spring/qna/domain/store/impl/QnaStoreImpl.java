@@ -32,4 +32,10 @@ public class QnaStoreImpl implements QnaStore {
 		return qnaList;
 	}
 
+	@Override
+	public int insertQuestion(Qna qna) {
+		int result = sqlSession.insert("qnaMapper.insertQuestion", qna);
+		return result;
+	}
+
 }

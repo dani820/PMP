@@ -15,7 +15,7 @@
 	</properties>
 	<dependencies>
 	
-		<!-- 파일 업로드 관련 라이브러리 -->
+		<!-- 파일 업로드 관련 라이브러리(common-io까지 포함) -->
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>

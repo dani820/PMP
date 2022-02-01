@@ -34,7 +34,7 @@
 							<td>${num}</td>
 							<td>${qna.qnaTitle}</td>
 							<td>${qna.qnaWriter}</td>
-							<td>${qna.qnaCount}</td>
+							<td>${qna.qUpdateDate}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
