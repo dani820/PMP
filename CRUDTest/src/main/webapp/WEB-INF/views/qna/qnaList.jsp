@@ -24,6 +24,7 @@
 						<th class="col-sm-1" style="text-align: center;">글번호</th>
 						<th class="col-sm-7" style="text-align: center;">제목</th>
 						<th class="col-sm-1" style="text-align: center;">작성자</th>
+						<th class="col-sm-1" style="text-align: center;">작성일</th>
 						<th class="col-sm-1" style="text-align: center;">조회수</th>
 					</tr>
 				</thead>
@@ -32,7 +33,12 @@
 					<c:set var="num" value="${pi.listCount - ((pi.currentPage - 1) * 5) - status.index}"/>
 						<tr>
 							<td>${num}</td>
-							<td>${qna.qnaTitle}</td>
+							<td>
+								<c:url var="qDetail" value="qnaDetailView.di">
+									<c:param name="qnaNo" value="${qna.qnaNo}"></c:param>
+								</c:url>
+								<a href="${qDetail}">${qna.qnaTitle}</a>
+							</td>
 							<td>${qna.qnaWriter}</td>
 							<td>${qna.qUpdateDate}</td>
 						</tr>

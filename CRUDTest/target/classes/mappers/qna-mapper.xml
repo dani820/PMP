@@ -18,7 +18,8 @@
 	</select>
 	
 	<select id="selectAllList" resultMap="qnaResultMap">
-		SELECT QNA_TITLE,
+		SELECT QNA_NO,
+			   QNA_TITLE,
 			   QNA_CONTENT,
 			   QNA_WRITER,
 			   Q_CREATE_DATE,
@@ -27,12 +28,16 @@
 	    WHERE QNA_PUBLIC_YN = 'Y'
 	</select>
 	
+	<select id="selectOneQuestion" resultMap="qnaResultMap">
+		SELECT * FROM QNA WHERE QNA_NO = #{qnaNo}
+	</select>
+	
 	<insert id="insertQuestion">
 		INSERT INTO QNA VALUES (
 			SEQ_QNA.NEXTVAL,
 			#{qnaTitle},
-			#{qnaWriter},
 			#{qnaContent},
+			#{qnaWriter},
 			SYSDATE,
 			SYSDATE,
 			#{qnaFilePath},

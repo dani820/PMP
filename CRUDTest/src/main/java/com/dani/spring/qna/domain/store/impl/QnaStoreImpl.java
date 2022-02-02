@@ -38,4 +38,10 @@ public class QnaStoreImpl implements QnaStore {
 		return result;
 	}
 
+	@Override
+	public Qna selectOneQuestion(int qnaNo) {
+		Qna qOne = sqlSession.selectOne("qnaMapper.selectOneQuestion", qnaNo);
+		return qOne;
+	}
+
 }

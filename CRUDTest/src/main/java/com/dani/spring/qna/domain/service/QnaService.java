@@ -12,5 +12,6 @@ public interface QnaService {
 	int getListCount();
 	ArrayList<Qna> printAll(PageInfo pi);
 	int registerQuestion(Qna qna);
+	Qna printOne(int qnaNo);
 
 }

@@ -37,6 +37,11 @@ public class QnaController {
 		
 		ArrayList<Qna> qnaList = qService.printAll(pi);
 		
+		for(Qna q : qnaList) {
+			System.out.println("q : " + q.getQnaNo());
+			
+		}
+		
 		if(qnaList.size() > 0) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("qnaList", qnaList);
@@ -45,6 +50,19 @@ public class QnaController {
 		}else {
 			return "errorPage";
 		}
+	}
+	
+	@RequestMapping(value="qnaDetailView.di", method=RequestMethod.GET)
+	public String qnaDetailView(Model model, @RequestParam("qnaNo") int qnaNo) {
+		Qna qOne = qService.printOne(qnaNo);
+		
+		if(qOne == null) {
+			return "errorPage";
+		} else {
+			model.addAttribute("qOne", qOne);
+			return "qna/qnaDetailView";
+		}
+		
 	}
 	
 	@RequestMapping(value="qnaWriteView.di", method=RequestMethod.GET)
@@ -104,5 +122,20 @@ public class QnaController {
 		
 		// 이클립스 workspace 에 실제 파일 저장하기
 		return filePath;
+	}
+	
+	@RequestMapping(value="qnaUpdateView.di", method=RequestMethod.GET)
+	public String qnaModifyView(Model model, @RequestParam(value="qnaNo") int qnaNo) {
+		Qna qOne = qService.printOne(qnaNo);
+		
+		model.addAttribute("qOne", qOne);
+		return "qna/qnaUpdateView";
+	}
+	
+	@RequestMapping(value="qnaModify.di", method=RequestMethod.POST)
+	public String qnaModify(HttpServletRequest request, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
+		
+		
+		return "redirect:qnaList.di";
 	}
 }

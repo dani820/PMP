@@ -25,13 +25,19 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public ArrayList<Qna> printAll(PageInfo pi) {
 		ArrayList<Qna> nList = qStore.selectAllList(pi);
-		return null;
+		return nList;
 	}
 
 	@Override
 	public int registerQuestion(Qna qna) {
 		int result = qStore.insertQuestion(qna);
 		return result;
+	}
+
+	@Override
+	public Qna printOne(int qnaNo) {
+		Qna qOne = qStore.selectOneQuestion(qnaNo);
+		return qOne;
 	}
 
 }
