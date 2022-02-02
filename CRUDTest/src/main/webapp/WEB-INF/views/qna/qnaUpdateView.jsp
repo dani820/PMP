@@ -23,6 +23,12 @@
 		<h1>문의글 수정</h1>
 		<div class="form-area">
 			<form class="form-horizontal" action="qnaModify.di" method="POST" encType="multipart/form-data">
+				<!-- 로직 수행 위해 필요한 파라미터를 사용자에게 보이지 않고 로직에 전달될 수 있도록 함 -->
+				<input type="hidden" name="qnaNo" value="${qOne.qnaNo}">
+				<!-- 첨부파일 수정 없을 때 원래 저장되어 있는 파일경로 전달 위함 -->
+				<input type="hidden" name="originFileName" value="${qOne.originFileName}">
+				<input type="hidden" name="renameFileName" value="${qOne.renameFileName}">
+				
 				<div class="form-group">
 					<label for="qnaTitle" class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-10">
@@ -43,9 +49,11 @@
 				<div class="form-group">
 					<div class="col-sm-2 control-label"></div>
 					<div class="col-sm-8 file-area">
-						<input id="fileName" value="${qOne.qnaFilePath}" disabled="disabled">
-						<label for="uploadFile">파일첨부</label>
-						<input type="file" size="50" id="uploadFile" name="uploadFile" value="파일선택">
+						<c:if test="${!empty qOne.originFileName}">
+							<input id="fileName" value="${qOne.originFileName}" disabled="disabled">
+						</c:if>
+						<label for="reloadFile">파일첨부</label>
+						<input type="file" size="50" id="reloadFile" name="reloadFile" value="파일선택">
 					</div>
 				</div>
 				<div class="form-group btn-area">
@@ -76,10 +84,10 @@
 			$('#file-area > label').on("click", function(e) {
 				console.log('click');
 				e.preventDefault();
-				$('#uploadFile').click();
+				$('#reloadFile').click();
 			});
 			
-			let fileTarget = $('#uploadFile');
+			let fileTarget = $('#reloadFile');
 			fileTarget.on('change', function() {
 				if(window.FileReader) {
 					var fileName = $(this)[0].files[0].name;

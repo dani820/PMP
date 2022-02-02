@@ -9,9 +9,8 @@ public class Qna {
 	private String qnaWriter;
 	private Date qCreateDate;
 	private Date qUpdateDate;
-	private String qnaOriginalFileName;
-	private String qnaRenameFileName;
-	private String qnaFilePath;
+	private String originFileName; // 사용자가 올리는 파일명
+	private String renameFileName; // 파일명 중복 방지 위해 내부 db 에서 지정하는 파일명
 	private String qnaPublicYn;
 	private int qnaCount;
 	
@@ -51,23 +50,17 @@ public class Qna {
 	public void setqUpdateDate(Date qUpdateDate) {
 		this.qUpdateDate = qUpdateDate;
 	}
-	public String getQnaOriginalFileName() {
-		return qnaOriginalFileName;
+	public String getOriginFileName() {
+		return originFileName;
 	}
-	public void setQnaOriginalFileName(String qnaOriginalFileName) {
-		this.qnaOriginalFileName = qnaOriginalFileName;
+	public void setOriginFileName(String originFileName) {
+		this.originFileName = originFileName;
 	}
-	public String getQnaRenameFileName() {
-		return qnaRenameFileName;
+	public String getRenameFileName() {
+		return renameFileName;
 	}
-	public void setQnaRenameFileName(String qnaRenameFileName) {
-		this.qnaRenameFileName = qnaRenameFileName;
-	}
-	public String getQnaFilePath() {
-		return qnaFilePath;
-	}
-	public void setQnaFilePath(String qnaFilePath) {
-		this.qnaFilePath = qnaFilePath;
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
 	}
 	public String getQnaPublicYn() {
 		return qnaPublicYn;
@@ -85,9 +78,8 @@ public class Qna {
 	@Override
 	public String toString() {
 		return "Qna [qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", qnaWriter="
-				+ qnaWriter + ", qCreateDate=" + qCreateDate + ", qUpdateDate=" + qUpdateDate + ", qnaOriginalFileName="
-				+ qnaOriginalFileName + ", qnaRenameFileName=" + qnaRenameFileName + ", qnaFilePath=" + qnaFilePath
-				+ ", qnaPublicYn=" + qnaPublicYn + ", qnaCount=" + qnaCount + "]";
+				+ qnaWriter + ", qCreateDate=" + qCreateDate + ", qUpdateDate=" + qUpdateDate + ", originalFileName="
+				+ originFileName + ", renameFileName=" + renameFileName	+ ", qnaPublicYn=" + qnaPublicYn + ", qnaCount=" + qnaCount + "]";
 	}
 	
 	

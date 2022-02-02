@@ -8,6 +8,8 @@
 		<result property="qnaWriter" column="QNA_WRITER"/>
 		<result property="qCreateDate" column="Q_CREATE_DATE"/>
 		<result property="qUpdateDate" column="Q_UPDATE_DATE"/>
+		<result property="originFileName" column="ORIGINAL_FILENAME"/>
+		<result property="renameFileName" column="RENAME_FILENAME"/>
 		<result property="qnaFilePath" column="QNA_FILEPATH"/>
 		<result property="qnaPublicYn" column="QNA_PUBLIC_YN"/>
 		<!-- <result property="qnaCount" column="QNA_COUNT"/> -->
@@ -40,8 +42,21 @@
 			#{qnaWriter},
 			SYSDATE,
 			SYSDATE,
-			#{qnaFilePath},
-			#{qnaPublicYn}
+			#{qnaPublicYn},
+			#{originFileName},
+			#{renameFileName}
 		)
 	</insert>
+	
+	<update id="updateQuestion">
+		UPDATE QNA SET
+			QNA_TITLE = #{qnaTitle},
+			QNA_CONTENT = #{qnaContent},
+			QNA_WRITER = #{qnaWriter},
+			Q_UPDATE_DATE = SYSDATE,
+			ORIGINAL_FILENAME = #{originFileName},
+			RENAME_FILENAME = #{renameFileName},
+			QNA_PUBLIC_YN = #{qnaPublicYn}
+		WHERE QNA_NO = #{qnaNo} 
+	</update>
 </mapper>

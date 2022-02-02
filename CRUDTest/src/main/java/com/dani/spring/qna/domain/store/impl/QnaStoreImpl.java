@@ -44,4 +44,10 @@ public class QnaStoreImpl implements QnaStore {
 		return qOne;
 	}
 
+	@Override
+	public int updateQuestion(Qna qna) {
+		int result = sqlSession.update("qnaMapper.updateQuestion", qna);
+		return result;
+	}
+
 }

@@ -13,5 +13,6 @@ public interface QnaStore {
 	ArrayList<Qna> selectAllList(PageInfo pi);
 	int insertQuestion(Qna qna);
 	Qna selectOneQuestion(int qnaNo);
+	int updateQuestion(Qna qna);
 
 }	

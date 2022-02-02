@@ -40,4 +40,10 @@ public class QnaServiceImpl implements QnaService {
 		return qOne;
 	}
 
+	@Override
+	public int modifyQna(Qna qna) {
+		int result = qStore.updateQuestion(qna);
+		return result;
+	}
+
 }

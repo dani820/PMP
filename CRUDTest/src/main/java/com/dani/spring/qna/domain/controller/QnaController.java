@@ -2,7 +2,9 @@ package com.dani.spring.qna.domain.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -73,44 +75,54 @@ public class QnaController {
 	@RequestMapping(value="qnaRegister.di", method=RequestMethod.POST)
 	public String qnaRegister(HttpServletRequest request, @ModelAttribute Qna qna, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile) {
 		
-		HttpSession session = request.getSession();
-		Member member = (Member)session.getAttribute("loginUser");
-		qna.setQnaWriter(member.getUserId());
-		
 		if(!uploadFile.getOriginalFilename().equals("")) {
-			String filePath = saveFile(uploadFile, request);
-			if(filePath != null) {
-				qna.setQnaFilePath(filePath);
+			String renameFileName = saveFile(uploadFile, request);
+			if(renameFileName != null) {
+				qna.setOriginFileName(uploadFile.getOriginalFilename());
+				qna.setRenameFileName(renameFileName);
 			}
 		}
 		
 		int result = 0;
 		result = qService.registerQuestion(qna);
 		
-		if(result < 0) {
+		if(result <= 0) {
 			return "errorPage";
 		} else {
 			return "redirect:qnaList.di";
 		}
 	}
 
-	private String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + File.separator + "qnaUpload";
 		
+		// java.io 패키지의 File 객체
 		File folder = new File(savePath);
 		
 		if(!folder.exists()) {
 			folder.mkdir();
 		}
 		
-		String filePath = folder + File.separator + uploadFile.getOriginalFilename();
+		// 파일명 변경
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String originalFileName = file.getOriginalFilename();
+		// indexOf() 는 왼쪽부터 세서 괄호 안 요소의 인덱스 값을 알려준다.
+		// lastIndexOf() 는 탐색 문자열이 마지막으로 등장하는 위치에 대한 index 를 반환한다.
+		// 즉 originalFileName.substring(originalFileName.lastIndexOf(".")+1 는
+		// 파일의 확장자를 가져오는 구문
+		
+		// System.currentTimeMillis() 는 오늘 날짜의 시분초까지 포함하여
+		// sdf 객체 생성한대로 yyyyMMddHHmmss 형태로 출력된다.
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+		
+		String filePath = folder + File.separator + renameFileName;
 		
 		try {
 			// MultipartFile 로 된 uploadFile 을 file 객체에 넣어 
 			// 실제 경로인 filePath 에 넣어주겠다는 의미
 			// 이 부분이 존재해야만 파일 등록이 가능하다.
-			uploadFile.transferTo(new File(filePath));
+			file.transferTo(new File(filePath));
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -121,7 +133,7 @@ public class QnaController {
 		System.out.println(savePath + "파일 저장");
 		
 		// 이클립스 workspace 에 실제 파일 저장하기
-		return filePath;
+		return renameFileName;
 	}
 	
 	@RequestMapping(value="qnaUpdateView.di", method=RequestMethod.GET)
@@ -133,9 +145,40 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="qnaModify.di", method=RequestMethod.POST)
-	public String qnaModify(HttpServletRequest request, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
+	public String qnaModify(HttpServletRequest request, @ModelAttribute Qna qOne, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
+		if(reloadFile != null && !reloadFile.isEmpty()) {
+			if(qOne.getOriginFileName() != "") {
+				// resources 경로 가져오기 위해 request 객체 파라미터로 넘겨준다.
+				deleteFile(qOne.getRenameFileName(), request);
+			}
+			
+			String renameFileName = saveFile(reloadFile, request);
+			if(renameFileName != null) {
+				qOne.setOriginFileName(reloadFile.getOriginalFilename());
+				qOne.setRenameFileName(renameFileName);
+			}
+		}
 		
+		int result = qService.modifyQna(qOne);
+		if(result <= 0) {
+			return "errorPage";
+		}else {
+			return "redirect:qnaDetailView.di?qnaNo="+qOne.getQnaNo();
+		}
 		
-		return "redirect:qnaList.di";
+	}
+
+	private void deleteFile(String fileName, HttpServletRequest request) {
+		// 세션에서 context 에 대한 모든 정보를 가지고 있는 서블릿 컨텍스를 통해
+		// resources 의 실제 경로를 가져올 수 있다.
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + File.separator + "qnaUpload";
+		File file = new File(savePath + File.separator + fileName);
+		
+		// file 객체의 exists 메소드를 통해 해당하는 실제 파일을 지울 수 있다.
+		if(file.exists()) {
+			file.delete();
+		}
+		
 	}
 }

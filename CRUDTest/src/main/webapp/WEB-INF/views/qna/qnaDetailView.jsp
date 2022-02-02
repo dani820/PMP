@@ -38,7 +38,9 @@
 						<p>${qOne.qnaContent}</p>
 					</div>
 					<div class="q-file-area">
-						<p>${qOne.qnaFilePath}</p>
+						<c:if test="${!empty qOne.originFileName}">
+							<p>${qOne.originFileName}</p>
+						</c:if>
 					</div>
 				</div>
 			</div>

@@ -13,5 +13,6 @@ public interface QnaService {
 	ArrayList<Qna> printAll(PageInfo pi);
 	int registerQuestion(Qna qna);
 	Qna printOne(int qnaNo);
+	int modifyQna(Qna qna);
 
 }
