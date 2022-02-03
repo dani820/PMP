@@ -12,6 +12,7 @@
 		<result property="renameFileName" column="RENAME_FILENAME"/>
 		<result property="qnaFilePath" column="QNA_FILEPATH"/>
 		<result property="qnaPublicYn" column="QNA_PUBLIC_YN"/>
+		<result property="qnaPwd" column="QNA_PASSWORD"/>
 		<!-- <result property="qnaCount" column="QNA_COUNT"/> -->
 	</resultMap>
 	
@@ -25,9 +26,10 @@
 			   QNA_CONTENT,
 			   QNA_WRITER,
 			   Q_CREATE_DATE,
-			   Q_UPDATE_DATE
+			   Q_UPDATE_DATE,
+	    	   QNA_PUBLIC_YN
 	    FROM QNA
-	    WHERE QNA_PUBLIC_YN = 'Y'
+	    ORDER BY QNA_NO DESC
 	</select>
 	
 	<select id="selectOneQuestion" resultMap="qnaResultMap">
@@ -60,7 +62,7 @@
 		WHERE QNA_NO = #{qnaNo} 
 	</update>
 	
-	<select id="selectPrivateOne" parameterType="map">
+	<select id="selectPrivateOne" parameterType="map" resultMap="qnaResultMap">
 		SELECT QNA_NO,
 			   QNA_TITLE,
 			   QNA_CONTENT,
@@ -69,11 +71,11 @@
 			   Q_UPDATE_DATE,
 			   ORIGINAL_FILENAME,
 			   QNA_PUBLIC_YN,
-			   QNA_PWD
+			   QNA_PASSWORD
 		FROM QNA
 		WHERE 1=1
 			  AND QNA_NO = #{qnaNo}
-			  AND QNA_PWD = #{qnaPwd};
+			  AND QNA_PASSWORD = #{qnaPwd}
 			  
 	</select>
 </mapper>

@@ -50,8 +50,8 @@
 				<div class="form-group btn-area">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-8 chkPublic">
-						<label><input type="checkbox" name="qnaPublicYn" value="Y" checked>공개</label>
-						<label><input type="checkbox" name="qnaPublicYn" value="N">비공개</label>
+						<label><input type="checkbox" name="qnaPublicYn" value="Y" onclick="chkOnlyOne(this)" checked>공개</label>
+						<label><input type="checkbox" name="qnaPublicYn" value="N" onclick="chkOnlyOne(this)">비공개</label>
 					</div>
 				</div>
 				<div class="form-group btn-area">
@@ -63,7 +63,17 @@
 			</form>		
 		</div>
 	</main>
-	
+	<script>
+		function chkOnlyOne(chk) {
+			var obj = document.getElementsByName("qnaPublicYn");
+			
+			for(var i = 0; i < obj.length; i++) {
+				if(obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+	</script>
 	<script>
 		$(function() {
 			$('#file-area > label').on("click", function(e) {

@@ -16,9 +16,10 @@
 	<script>
 		var message = "${msg}";
 		var url = "${url}";
+		var param = "${qnaNo}";
 		
 		alert(message);
-		document.location.href = url + "?qnaNo='${qnaNo}'"; //이거 맞나 
+		location.href = url + "?qnaNo=" + param;
 	</script>
 </body>
 </html>

@@ -17,7 +17,6 @@
 	
 	<main>
 		<h1>문의글 보기</h1>
-		<c:if test="${qOne.qnaPublicYn eq 'Y'}">
 			<div class="question-container">
 				<div class="question-header">
 					<div class="q-title-area">
@@ -45,14 +44,13 @@
 				</div>
 			</div>
 			<div class="question-btn">
-				<!-- 세션 아이디와 작성자 일치 여부에 따라 수정 버튼 유무 결정 -->
+				<!-- 세션 아이디와 작성자 일치 여부에 따라 수정/삭제 버튼 유무 결정 -->
 				<c:if test="${loginUser.userId == qOne.qnaWriter }">
 					<button type="button" class="btn btn-default" onclick="location.href='qnaUpdateView.di?qnaNo=${qOne.qnaNo}'">수정</button>
-				</c:if>
 				<button type="button" class="btn btn-danger" onclick="location.href='qnaDelete.di?qnaNo=${qOne.qnaNo}'">삭제</button>
+				</c:if>
 				<button type="button" class="btn btn-default" onclick="location.href='qnaList.di'">목록</button>
 			</div>
-		</c:if>
 	</main>
 </body>
 </html>

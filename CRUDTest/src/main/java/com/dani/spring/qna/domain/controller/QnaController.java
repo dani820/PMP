@@ -85,8 +85,8 @@ public class QnaController {
 	    
 	    if(qOne == null) {
 	        model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-	        model.addAttribute("qnaNo", qnaNo); // 다시 디테일뷰 체크 로직으로 가려면 qnaNo 을 보내줘야 하는데 이게 맞나?
-	        model.addAttribute("url", "qnaChkPwd.di");
+	        model.addAttribute("qnaNo", qnaNo);
+	        model.addAttribute("url", "qnaDetailView.di");
 	        return "qna/pwdError";
 	    } else {
 	        model.addAttribute("qOne", qOne);
