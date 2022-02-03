@@ -59,4 +59,21 @@
 			QNA_PUBLIC_YN = #{qnaPublicYn}
 		WHERE QNA_NO = #{qnaNo} 
 	</update>
+	
+	<select id="selectPrivateOne" parameterType="map">
+		SELECT QNA_NO,
+			   QNA_TITLE,
+			   QNA_CONTENT,
+			   QNA_WRITER,
+			   Q_CREATE_DATE,
+			   Q_UPDATE_DATE,
+			   ORIGINAL_FILENAME,
+			   QNA_PUBLIC_YN,
+			   QNA_PWD
+		FROM QNA
+		WHERE 1=1
+			  AND QNA_NO = #{qnaNo}
+			  AND QNA_PWD = #{qnaPwd};
+			  
+	</select>
 </mapper>

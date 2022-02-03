@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -55,16 +57,41 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="qnaDetailView.di", method=RequestMethod.GET)
-	public String qnaDetailView(Model model, @RequestParam("qnaNo") int qnaNo) {
+	public String qnaDetailView(Model model, @RequestParam("qnaNo") int qnaNo, HttpServletRequest request) {
 		Qna qOne = qService.printOne(qnaNo);
 		
 		if(qOne == null) {
 			return "errorPage";
 		} else {
-			model.addAttribute("qOne", qOne);
-			return "qna/qnaDetailView";
+		    if(qOne.getQnaPublicYn().equals("Y")) {
+		        model.addAttribute("qOne", qOne);
+		        return "qna/qnaDetailView";
+		    } else {
+		        // 게시글 비공개일 때 비밀번호 체크하기
+		        model.addAttribute("qnaNo", qnaNo);
+		        return "qna/qnaPwdView";
+		    }
 		}
 		
+	}
+	
+	@RequestMapping(value="qnaChkPwd.di", method=RequestMethod.POST)
+	public String qnaChkPwd(@RequestParam(value="qnaPwd") int qnaPwd, @RequestParam(value="qnaNo") int qnaNo, Model model, HttpServletRequest request) {
+	    Map<String, Integer> chkMap = new HashMap<String, Integer>();
+	    chkMap.put("qnaPwd", qnaPwd);
+	    chkMap.put("qnaNo", qnaNo);
+	    
+	    Qna qOne = qService.printPrivateOne(chkMap);
+	    
+	    if(qOne == null) {
+	        model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+	        model.addAttribute("qnaNo", qnaNo); // 다시 디테일뷰 체크 로직으로 가려면 qnaNo 을 보내줘야 하는데 이게 맞나?
+	        model.addAttribute("url", "qnaChkPwd.di");
+	        return "qna/pwdError";
+	    } else {
+	        model.addAttribute("qOne", qOne);
+            return "qna/qnaDetailView";
+	    }
 	}
 	
 	@RequestMapping(value="qnaWriteView.di", method=RequestMethod.GET)

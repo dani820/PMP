@@ -1,6 +1,7 @@
 package com.dani.spring.qna.domain.store.impl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,4 +51,9 @@ public class QnaStoreImpl implements QnaStore {
 		return result;
 	}
 
+    @Override
+    public Qna printPrivateOne(Map<String, Integer> chkMap) {
+        Qna qOne = sqlSession.selectOne("qnaMapper.selectPrivateOne", chkMap);
+        return qOne;
+    }
 }

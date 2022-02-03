@@ -12,6 +12,7 @@ public class Qna {
 	private String originFileName; // 사용자가 올리는 파일명
 	private String renameFileName; // 파일명 중복 방지 위해 내부 db 에서 지정하는 파일명
 	private String qnaPublicYn;
+	private int qnaPwd; // 게시글 비공개시 지정 비밀번호
 	private int qnaCount;
 	
 	public int getQnaNo() {
@@ -68,19 +69,28 @@ public class Qna {
 	public void setQnaPublicYn(String qnaPublicYn) {
 		this.qnaPublicYn = qnaPublicYn;
 	}
-	public int getQnaCount() {
+	public int getQnaPwd() {
+        return qnaPwd;
+    }
+    public void setQnaPwd(int qnaPwd) {
+        this.qnaPwd = qnaPwd;
+    }
+    public int getQnaCount() {
 		return qnaCount;
 	}
 	public void setQnaCount(int qnaCount) {
 		this.qnaCount = qnaCount;
 	}
 	
-	@Override
-	public String toString() {
-		return "Qna [qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", qnaWriter="
-				+ qnaWriter + ", qCreateDate=" + qCreateDate + ", qUpdateDate=" + qUpdateDate + ", originalFileName="
-				+ originFileName + ", renameFileName=" + renameFileName	+ ", qnaPublicYn=" + qnaPublicYn + ", qnaCount=" + qnaCount + "]";
-	}
-	
+    @Override
+    public String toString() {
+        return "Qna [qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle
+                + ", qnaContent=" + qnaContent + ", qnaWriter=" + qnaWriter
+                + ", qCreateDate=" + qCreateDate + ", qUpdateDate="
+                + qUpdateDate + ", originFileName=" + originFileName
+                + ", renameFileName=" + renameFileName + ", qnaPublicYn="
+                + qnaPublicYn + ", qnaPwd=" + qnaPwd + ", qnaCount=" + qnaCount
+                + "]";
+    }
 	
 }

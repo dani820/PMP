@@ -1,6 +1,7 @@
 package com.dani.spring.qna.domain.service.Impl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,11 @@ public class QnaServiceImpl implements QnaService {
 		int result = qStore.updateQuestion(qna);
 		return result;
 	}
+
+    @Override
+    public Qna printPrivateOne(Map<String, Integer> chkMap) {
+        Qna qOne = qStore.printPrivateOne(chkMap);
+        return qOne;
+    }
 
 }

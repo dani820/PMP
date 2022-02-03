@@ -1,6 +1,7 @@
 package com.dani.spring.qna.domain.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,6 @@ public interface QnaService {
 	int registerQuestion(Qna qna);
 	Qna printOne(int qnaNo);
 	int modifyQna(Qna qna);
+    Qna printPrivateOne(Map<String, Integer> chkMap);
 
 }

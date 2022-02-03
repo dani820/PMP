@@ -1,6 +1,7 @@
 package com.dani.spring.qna.domain.store;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,6 @@ public interface QnaStore {
 	int insertQuestion(Qna qna);
 	Qna selectOneQuestion(int qnaNo);
 	int updateQuestion(Qna qna);
+    Qna printPrivateOne(Map<String, Integer> chkMap);
 
 }	
